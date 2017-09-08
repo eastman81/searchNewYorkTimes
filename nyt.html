@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>NYTSearch</title>
+</head>
+
+<body>
+
+   
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+    
+   var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+   url += '?' + $.param({
+   'api-key': "5e3027a120724e299dd76c756242e300"
+   });
+   $.ajax({
+   url: url,
+   method: 'GET',
+   }).done(function(result) {
+   console.log(result);
+   }).fail(function(err) {
+   throw err;
+   });
+    
+
+  </script>
+</body>
+
+</html>
