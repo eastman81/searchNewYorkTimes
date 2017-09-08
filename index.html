@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"> 
+
+  <title>Bootstrap Portfolio</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<div class = "container">
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-3">New York Times Search</h1>
+  </div>
+</div>
+
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="inputSearch" class="col-form-label">Search Term: </label>
+      <input type="text" class="form-control" id="inputSearch">
+    </div>
+  </div>
+
+  <div class="form-group col-md-12">
+    <label for="inputNumber" class="col-form-label">Number of Records to Retrieve: </label>
+    <input type="number" class="form-control" id="inputNumber">
+  </div>
+
+  <div class="form-group col-md-12">
+    <label for="inputStartYear" class="col-form-label">Start Year (Optional): </label>
+    <input type="number" class="form-control" id="inputStartYear">
+  </div>
+
+    <div class="form-group col-md-12">
+      <label for="inputEndYear" class="col-form-label">End Year (Optional): </label>
+      <input type="number" class="form-control" id="inputEndYear">
+    </div>
+
+<button id = "searchButton" type="search" class="btn btn-primary">Search</button>
+<button type="clear-results" class = "btn btn-primary">Clear Results</button>
+
+
+</form>
+
+</div>
+<script src=“https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js“></script>
+  <script type=“text/javascript”>
+
+var searchTerm;
+  var startYear;
+  var endYear;
+  var numberOfRecords;
+
+
+var url = “https://api.nytimes.com/svc/search/v2/articlesearch.json“;
+url += ‘?’ + $.param({
+  ‘api-key’: “5e3027a120724e299dd76c756242e300”,
+  ‘q’: searchTerm,
+  ‘begin_date’: startYear,
+  ‘end_date’: endYear,
+  ‘page’: numberOfRecords
+});
+$.ajax({
+  url: url,
+  method: ‘GET’,
+}).done(function(result) {
+  console.log(result);
+  console.log(result.response.docs[1].snippet);
+}).fail(function(err) {
+  throw err;
+});
+    
+
+ $(“#searchButton”).on(“click”, function(event) {
+        
+       event.preventDefault();
+
+       searchTerm = $(‘#inputSearch’).val();
+        startYear = $(‘#inputStartYear’).val();
+        endYear = $(‘#inputEndYear’).val();
+        numberOfRecords = $(‘#inputNumber’).val();
+        
+     });
+ 	console.log()
+     </script>
+
+</body>
+
+</html>
